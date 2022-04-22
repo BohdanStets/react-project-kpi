@@ -1,5 +1,5 @@
 import AppHeader from "../appHeader/AppHeader";
-
+import RandomChar from "../randomChar/RandomChar";
 const App = () => {
   return (
     <div className="app">
@@ -8,6 +8,9 @@ const App = () => {
           <AppHeader />
         </div>
       </div>
+      <main>
+        <RandomChar />
+      </main>
     </div>
   );
 };

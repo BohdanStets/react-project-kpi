@@ -1,0 +1,85 @@
+@import '../../style/variables.scss';
+
+.randomchar {
+
+   display: flex;
+   justify-content: space-between;
+   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+
+   &>div {
+      width: 50%;
+   }
+
+   &__block {
+      padding: 40px 35px;
+      display: flex;
+      justify-content: space-between;
+   }
+
+   &__img {
+      width: 180px;
+      height: 100%;
+      object-fit: cover;
+   }
+
+   &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 3px;
+      margin-left: 20px;
+   }
+
+   &__name {
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 29px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      font-style: italic;
+      border-bottom: 4px solid #000;
+   }
+
+   &__descr {
+      font-size: 14px;
+      line-height: 18px;
+      padding-bottom: 10px;
+      text-align: justify;
+   }
+
+   &__btns {
+      a:nth-child(1) {
+         margin-right: 30px;
+         margin-bottom: 10px;
+      }
+   }
+
+   &__static {
+      padding: 40px 35px;
+      background-color: $dark;
+      position: relative;
+
+      button {
+         margin-top: 13px;
+      }
+   }
+
+   &__title {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.045em;
+      color: #FFFFFF;
+
+      &:nth-child(2) {
+         margin-top: 33px;
+      }
+   }
+
+   &__decoration {
+      position: absolute;
+      bottom: 14px;
+      right: -37px;
+   }
+}
