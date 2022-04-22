@@ -1,0 +1,53 @@
+@import '../../style/variables.scss';
+
+.app {
+   height: 2000px;
+
+   &-wrapper {
+      border-bottom: 10px solid $main-color;
+      position: fixed;
+      width: 100%;
+   }
+
+   &__header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+   }
+
+
+   &__title {
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 37px;
+      text-transform: uppercase;
+
+      span {
+         background-color:$main-color;
+         padding: 15px 10px;
+         color: #fff;
+      }
+   }
+
+   &__menu {
+      ul {
+         display: flex;
+         justify-content: space-between;
+         font-weight: bold;
+         font-size: 24px;
+         line-height: 32px;
+         cursor: pointer;
+         li {
+            margin: 0 8px;
+            background-color:$main-color;
+            padding: 0px 20px;
+            border-radius: 20px 0px 20px 20px;
+            color:#fff;
+            transition: all 0.5s ease-in-out;
+            &:hover{
+               border-radius: 20px 20px 20px 0px;
+            }
+         }
+      }
+   }
+}
