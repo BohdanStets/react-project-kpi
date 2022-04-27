@@ -4,7 +4,7 @@
    height: 2000px;
 
    &-wrapper {
-      background-color: #fff;
+      background-color: $dark;
       border-bottom: 10px solid $main-color;
       width: 100%;
       box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
@@ -23,11 +23,11 @@
       font-size: 40px;
       line-height: 37px;
       text-transform: uppercase;
+      color: #fff;
 
       span {
-         background-color:$main-color;
+         background-color: $main-color;
          padding: 15px 10px;
-         color: #fff;
       }
    }
 
@@ -39,14 +39,16 @@
          font-size: 24px;
          line-height: 32px;
          cursor: pointer;
+
          li {
             margin: 0 8px;
-            background-color:$main-color;
+            background-color: $main-color;
             padding: 0px 20px;
             border-radius: 20px 0px 20px 20px;
-            color:#fff;
+            color: #fff;
             transition: all 0.5s ease-in-out;
-            &:hover{
+
+            &:hover {
                border-radius: 20px 20px 20px 0px;
                background-color: $button-color-hover;
             }
