@@ -1,8 +1,12 @@
 import React from "react";
 import App from "./components/app/App";
 import ReactDOM from "react-dom";
+import MarvelService from "./services/MarvelService";
 import "./style/style.scss";
 
+const marvelService = new MarvelService();
+marvelService.getAllCharacters().then(res => console.log(res))
+marvelService.ge
 ReactDOM.render(
   <React.StrictMode>
     <App />
