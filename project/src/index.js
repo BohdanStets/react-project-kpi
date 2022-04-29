@@ -6,7 +6,6 @@ import "./style/style.scss";
 
 const marvelService = new MarvelService();
 marvelService.getAllCharacters().then(res => console.log(res))
-marvelService.ge
 ReactDOM.render(
   <React.StrictMode>
     <App />
