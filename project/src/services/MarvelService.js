@@ -10,7 +10,7 @@ class MarvelService {
   };
   getAllCharacters = async () => {
     const res = await this.getResource(
-      `${this._apiBase}characters?limit=9&offset=210&apikey=${this._apiKey}`
+      `${this._apiBase}characters?limit=9&offset=410&apikey=${this._apiKey}`
     );
     return res.data.results.map((item) => this._transformCharacter(item));
   };
@@ -21,14 +21,13 @@ class MarvelService {
   };
   _transformCharacter = (res) => {
     return {
+      id: res.id,
       name: res.name,
       description: res.description,
-      thumbnail:
-        res.thumbnail.path +
-        '.' +
-        res.thumbnail.extension,
+      thumbnail: res.thumbnail.path + '.' + res.thumbnail.extension,
       homepage: res.urls[0].url,
       wiki: res.urls[1].url,
+      comics:res.comics.items,
     };
   };
 }
