@@ -3,6 +3,7 @@ import { Component } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skelet from '../skelet/Skelet';
+import PropTypes from 'prop-types';
 class CharInfo extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ class CharInfo extends Component {
   componentDidMount() {
     this.setState({ loading: true });
   }
-  
+
   render() {
     const { name, description, thumbnail, wiki, homepage, comics } =
       this.props.char;
@@ -51,7 +52,12 @@ class CharInfo extends Component {
                   </a>
                 </div>
               </div>
-              <button className="btn-delete" onClick={() => this.props.onCharDelete()}>X</button>
+              <button
+                className='btn-delete'
+                onClick={() => this.props.onCharDelete()}
+              >
+                X
+              </button>
             </div>
             <div className='char__descr'>{description}</div>
             <div className='char__comics'>Comics:</div>
@@ -62,5 +68,8 @@ class CharInfo extends Component {
     );
   }
 }
-
+CharInfo.propsTypes = {
+  charId: PropTypes.object,
+  onCharDelete: PropTypes.func,
+};
 export default CharInfo;

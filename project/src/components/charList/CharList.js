@@ -4,6 +4,7 @@ import noImage from '../../resources/img/no-image.jpg';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
+import PropTypes from 'prop-types';
 
 class CharList extends Component {
   constructor(props) {
@@ -99,5 +100,7 @@ class CharList extends Component {
     );
   }
 }
-
+CharList.propTypes = {
+  onCharLoaded: PropTypes.func,
+};
 export default CharList;
