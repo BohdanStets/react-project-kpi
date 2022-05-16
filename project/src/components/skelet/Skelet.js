@@ -2,7 +2,7 @@ import './Skelet.scss';
 
 const Skelet = () => {
     return (
-        <div>
+        <div className="skelet-wrapper">
             <p className="char__select">Please select a character to see information</p>
             <div className="skelet">
                 <div className="pulse skelet__header">

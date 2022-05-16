@@ -4,6 +4,7 @@ import noImage from '../../resources/img/no-image.jpg';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
+
 class CharList extends Component {
   constructor(props) {
     super(props);
@@ -12,25 +13,41 @@ class CharList extends Component {
     charList: [],
     loading: true,
     error: false,
+    newItemsLoading: false,
+    offset: 410,
   };
   marvelService = new MarvelService();
-  onCharListLoaded = (charList) => {
-    this.setState({ charList, loading: false });
+  onCharListLoaded = (newCharList) => {
+    let ended = false;
+    if (newCharList.length < 9) {
+      ended = true;
+    }
+    this.setState(({ offset, charList }) => ({
+      charList: [...charList, ...newCharList],
+      loading: false,
+      newItemsLoading: false,
+      offset: offset + 9,
+      charEnded: false,
+      charEnded: ended,
+    }));
   };
   onCharListLoading = () => {
     this.setState({ loading: true });
   };
-  updateCharList = () => {
-    this.onCharListLoading();
+
+  componentDidMount() {
+    this.onRequest();
+  }
+  onRequest = (offset) => {
+    this.onCharListUpdate();
     this.marvelService
-      .getAllCharacters()
+      .getAllCharacters(offset)
       .then((res) => this.onCharListLoaded(res))
       .catch(this.onError);
   };
-  componentDidMount() {
-    this.updateCharList();
-  }
-
+  onCharListUpdate = () => {
+    this.setState({ newItemsLoading: true });
+  };
   onError = () => {
     this.setState({ error: false, loading: false });
   };
@@ -61,7 +78,8 @@ class CharList extends Component {
     );
   };
   render() {
-    const { charList, loading, error } = this.state;
+    const { charList, loading, error, newItemsLoading, offset, charEnded } =
+      this.state;
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
     return (
@@ -69,7 +87,14 @@ class CharList extends Component {
         {errorMessage}
         {spinner}
         {!(loading || error) ? this.renderItems(charList) : null}
-        <button className='button button__main'>load more</button>
+        <button
+          disabled={newItemsLoading}
+          style={{ display: charEnded ? 'none' : 'block' }}
+          onClick={() => this.onRequest(offset)}
+          className='button button__main'
+        >
+          load more
+        </button>
       </div>
     );
   }

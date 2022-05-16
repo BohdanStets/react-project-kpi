@@ -63,6 +63,7 @@
       }
 
       &-item {
+         cursor: pointer;
          width: 100%;
          padding: 0px 10px;
          line-height: 25px;
@@ -79,4 +80,21 @@
       margin-top: 120px;
    }
 
+}
+.btn-delete{
+   background-color:transparent;
+   margin-left: 5.5vw;
+   cursor: pointer;
+   text-transform: uppercase;
+   font-weight: 500;
+   font-size: 20px;
+   border:2px solid $button-color-hover;
+   border-radius: 100%;
+   width: 40px;
+   height: 40px;
+   transition: all 0.5s ease;
+   &:hover{
+      background-color: rgba($button-color-hover,1);
+      color:#fff;
+   }
 }
