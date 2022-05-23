@@ -1,20 +1,33 @@
-import React from "react";
-import "./AppHeader.scss";
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import './AppHeader.scss';
 const AppHeader = () => {
   return (
-    <header className="app__header">
-      <h1 className="app__title">
-        <a href="#">
+    <header className='app__header'>
+      <h1 className='app__title'>
+        <Link to='/'>
           <span>Marvel</span> information portal
-        </a>
+        </Link>
       </h1>
-      <nav className="app__menu">
+      <nav className='app__menu'>
         <ul>
           <li>
-            <a href="#">Characters</a>
+            <NavLink
+              end
+              to='/'
+              className={({ isActive }) => (isActive ? 'nav-active' : null)}
+            >
+              Characters
+            </NavLink>
           </li>
           <li>
-            <a href="#">Comics</a>
+            <NavLink
+              end
+              to='/comics'
+              className={({ isActive }) => (isActive ? 'nav-active' : null)}
+            >
+              Comics
+            </NavLink>
           </li>
         </ul>
       </nav>
