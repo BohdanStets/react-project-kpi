@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skelet from '../skelet/Skelet';
+import noImage from '../../resources/img/no-image.jpg';
 import PropTypes from 'prop-types';
 const CharInfo = (props) => {
   const [loading, setLoading] = useState(false);
@@ -24,8 +25,7 @@ const CharInfo = (props) => {
     setLoading(true);
   }, []);
 
-  const { name, description, thumbnail, wiki, homepage, comics } =
-    props.char;
+  const { name, description, thumbnail, wiki, homepage, comics } = props.char;
   const skelet = loading ? <Skelet /> : null;
   return (
     <>
@@ -34,7 +34,15 @@ const CharInfo = (props) => {
       ) : (
         <div className='char__info'>
           <div className='char__basics'>
-            <img src={thumbnail} alt={thumbnail} />
+            <img
+              src={
+                thumbnail !==
+                'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'
+                  ? thumbnail
+                  : noImage
+              }
+              alt={thumbnail}
+            />
             <div className='char__info-wrapper'>
               <div className='char__info-name'>{name}</div>
               <div className='char__btns'>
@@ -46,10 +54,7 @@ const CharInfo = (props) => {
                 </a>
               </div>
             </div>
-            <button
-              className='btn-delete'
-              onClick={() => props.onCharDelete()}
-            >
+            <button className='btn-delete' onClick={() => props.onCharDelete()}>
               X
             </button>
           </div>

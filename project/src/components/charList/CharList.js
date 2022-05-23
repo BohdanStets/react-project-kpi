@@ -3,50 +3,38 @@ import { useState, useEffect, useRef } from 'react';
 import noImage from '../../resources/img/no-image.jpg';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import PropTypes from 'prop-types';
 
 const CharList = (props) => {
   const [charList, setCharList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [newItemsLoading, setNewItemsLoading] = useState(false);
   const [offset, setOffset] = useState(410);
   const [charEnded, setCharEnded] = useState(false);
 
-  const marvelService = new MarvelService();
+  const { loading, error, getAllCharacters } = useMarvelService();
   const onCharListLoaded = (newCharList) => {
     let ended = false;
     if (newCharList.length < 9) {
       ended = true;
     }
     setCharList((charList) => [...charList, ...newCharList]);
-    setLoading(false);
     setNewItemsLoading(false);
     setOffset((offset) => offset + 9);
     setCharEnded((charEnded) => ended);
   };
-  const onCharListLoading = () => {
-    setLoading(true);
-  };
+
   let itemsRef = useRef([]);
   useEffect(() => {
-    onRequest();
+    onRequest(offset, true);
   }, []);
 
-  const onRequest = (offset) => {
-    onCharListUpdate();
-    marvelService
-      .getAllCharacters(offset)
-      .then((res) => onCharListLoaded(res))
-      .catch(onError);
+  const onRequest = (offset, initial) => {
+    initial ? onCharListUpdate(false) : onCharListUpdate(true);
+    getAllCharacters(offset).then((res) => onCharListLoaded(res));
   };
   const onCharListUpdate = () => {
     setNewItemsLoading(true);
-  };
-  const onError = () => {
-    setError(false);
-    setLoading(false);
   };
   const focusOnItem = (id) => {
     itemsRef.current.forEach((item) =>
@@ -92,7 +80,7 @@ const CharList = (props) => {
     <div className='char__list'>
       {errorMessage}
       {spinner}
-      {!(loading || error) ? renderItems(charList) : null}
+      {renderItems(charList)}
       <button
         disabled={newItemsLoading}
         style={{ display: charEnded ? 'none' : 'block' }}
