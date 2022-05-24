@@ -5,17 +5,22 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skelet from '../skelet/Skelet';
 import noImage from '../../resources/img/no-image.jpg';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 const CharInfo = (props) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
-  const onCharInfoLoaded = () => setLoading(true);
   const onComicsloaded = (comics) => {
     const items = [];
     for (let item in comics) {
+
+      let link = `/comics/${comics[item].resourceURI.replace(
+        'http://gateway.marvel.com/v1/public/comics/',
+        ''
+      )}`;
+      console.log(link)
       items.push(
         <li className='char__comics-item' key={comics[item].name}>
-          <a href={comics[item].resourceURL}>{comics[item].name}</a>
+          <Link to={link}>{comics[item].name}</Link>
         </li>
       );
     }
@@ -26,6 +31,7 @@ const CharInfo = (props) => {
   }, []);
 
   const { name, description, thumbnail, wiki, homepage, comics } = props.char;
+  console.log(comics);
   const skelet = loading ? <Skelet /> : null;
   return (
     <>

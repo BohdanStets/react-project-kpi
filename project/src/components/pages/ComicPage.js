@@ -1,12 +1,15 @@
 import { React } from 'react';
-import SingleComic from '../SingleComic/SingleComic';
+import SingleCSinglePageComicomicPage from './SinglePageComic';
 import AppBanner from '../AppBanner/AppBanner';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const ComicPage = () => {
   return (
     <>
-      <AppBanner />
-      <SingleComic />
+      <ErrorBoundary>
+        <AppBanner />
+        <SinglePageComic />
+      </ErrorBoundary>
     </>
   );
 };
