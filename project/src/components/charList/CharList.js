@@ -9,15 +9,13 @@ import PropTypes from 'prop-types';
 const CharList = (props) => {
   const [charList, setCharList] = useState([]);
   const [newItemsLoading, setNewItemsLoading] = useState(false);
-  const [offset, setOffset] = useState(410);
+  const DATASET_OFFSET = 410;
+  const [offset, setOffset] = useState(DATASET_OFFSET);
   const [charEnded, setCharEnded] = useState(false);
 
   const { loading, error, getAllCharacters } = useMarvelService();
   const onCharListLoaded = (newCharList) => {
-    let ended = false;
-    if (newCharList.length < 9) {
-      ended = true;
-    }
+    let ended = newCharList.length < 9;
     setCharList((charList) => [...charList, ...newCharList]);
     setNewItemsLoading(false);
     setOffset((offset) => offset + 9);
@@ -30,12 +28,10 @@ const CharList = (props) => {
   }, []);
 
   const onRequest = (offset, initial) => {
-    initial ? onCharListUpdate(false) : onCharListUpdate(true);
+    setNewItemsLoading(initial);
     getAllCharacters(offset).then((res) => onCharListLoaded(res));
   };
-  const onCharListUpdate = () => {
-    setNewItemsLoading(true);
-  };
+ 
   const focusOnItem = (id) => {
     itemsRef.current.forEach((item) =>
       item.classList.remove('char__item_selected')

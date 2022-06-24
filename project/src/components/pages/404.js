@@ -1,9 +1,20 @@
 import React from 'react';
-import NoPage from '../../resources/img/404.png';
+import { Link, NavLink } from 'react-router-dom';
+import './404.scss';
 const NoMatch = () => {
-  return <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-     <h1 style={{fontSize:'300px',fontWeight:'300'}}>404</h1>
-     <h3 style={{fontSize:'50px',fontWeight:'300'}}>Not Found</h3>
-  </div>;
+  return (
+    <div className='error-wrapper'>
+      <h1 className='error-title'>Oops!</h1>
+      <h2 className='error-subtitle'>
+        <span>404</span> - page not found
+      </h2>
+      <p className='error-text'>
+        The page you are looking for might have been removed or smth else!:(
+      </p>
+      <NavLink className='error-link' end to='/'>
+        Go to homepage
+      </NavLink>
+    </div>
+  );
 };
 export default NoMatch;
